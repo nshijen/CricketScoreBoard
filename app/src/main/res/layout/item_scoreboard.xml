@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tv_player_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_player_score"
+        app:layout_constraintHorizontal_weight="5"
+        android:textAllCaps="true"
+        android:padding="10dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/tv_player_score"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/tv_player_name"
+        app:layout_constraintStart_toEndOf="@id/tv_player_name"
+        app:layout_constraintEnd_toStartOf="@id/tv_player_status"
+        app:layout_constraintHorizontal_weight="2"
+        android:textAllCaps="true"
+        android:padding="10dp"
+        android:gravity="center" />
+    <TextView
+        android:id="@+id/tv_player_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/tv_player_name"
+        app:layout_constraintStart_toEndOf="@id/tv_player_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="3"
+        android:textAllCaps="true"
+        android:padding="10dp"
+        android:gravity="center" />
+</androidx.constraintlayout.widget.ConstraintLayout>
