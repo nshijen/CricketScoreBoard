@@ -1,16 +1,17 @@
-package com.shijen.cricketscoreboard
+package com.shijen.cricketscoreboard.ScoreBoard
 
-import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
 import com.shijen.cricketscoreboard.Entities.Players
 
-class PlayersDiffUtils : DiffUtil.Callback{
-    var oldList:ArrayList<Players>
-    var newList:ArrayList<Players>
-    constructor(oldList: ArrayList<Players>,newList:ArrayList<Players>){
+class PlayersDiffUtils : DiffUtil.Callback {
+    var oldList: ArrayList<Players>
+    var newList: ArrayList<Players>
+
+    constructor(oldList: ArrayList<Players>, newList: List<Players>) {
         this.oldList = oldList
-        this.newList = newList
+        this.newList = newList as ArrayList<Players>
     }
+
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldList.get(oldItemPosition).name.equals(newList.get(newItemPosition).name)
     }
