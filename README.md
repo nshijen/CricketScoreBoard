@@ -1,4 +1,3 @@
 # CricketScoreBoard
-Random number cricket scoreboard in kotlin
-Added by nshijendupe
-Checking pull request
+Random number cricket scoreboard in kotlin and MVVM architecture.
+
