@@ -2,6 +2,7 @@ package com.shijen.cricketscoreboard.ScoreBoard
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,11 @@ import com.shijen.cricketscoreboard.R
 import kotlinx.android.synthetic.main.fragment_scoreboard.*
 import kotlinx.android.synthetic.main.fragment_scoreboard.view.*
 
+
 class FragmentScoreboard : Fragment(), View.OnClickListener {
     var adapter = PlayersAdapter()
     lateinit var viewModel: ScoreboardViewmodel
+    lateinit var vibrator: Vibrator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,9 +54,18 @@ class FragmentScoreboard : Fragment(), View.OnClickListener {
         root.rv_score_board.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         root.rv_score_board.adapter = adapter
+        vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    }
+
+    private fun animateObject() {
+        btn_bowl.animate().rotation(360f).withEndAction {
+            btn_bowl.rotation = 0f
+        }
     }
 
     override fun onClick(v: View?) {
         viewModel.bowl()
+        animateObject()
+        vibrator.vibrate(100);
     }
 }
