@@ -1,18 +1,18 @@
-package com.shijen.cricketscoreboard.ScoreBoard
+package com.shijen.cricketscoreboard
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.shijen.cricketscoreboard.R
+import com.shijen.cricketscoreboard.game.FragmentGame
 import kotlinx.android.synthetic.main.activity_main.*
 
-class ScoreboardActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var scoreboard:Fragment =
-            FragmentScoreboard();
-        supportFragmentManager.beginTransaction().add(container.id,scoreboard,"Scoreboard").commit()
+        var game:Fragment =
+            FragmentGame.getInstance();
+        supportFragmentManager.beginTransaction().add(container.id,game,"Game").commit()
     }
 }

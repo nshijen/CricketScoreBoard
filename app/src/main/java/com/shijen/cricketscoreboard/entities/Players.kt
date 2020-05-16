@@ -1,4 +1,4 @@
-package com.shijen.cricketscoreboard.Entities
+package com.shijen.cricketscoreboard.entities
 
 import java.io.Serializable
 

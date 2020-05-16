@@ -1,8 +1,6 @@
-package com.shijen.cricketscoreboard.Entities
+package com.shijen.cricketscoreboard.entities
 
-import android.util.Log
-
-enum class ScoreResult{
+enum class BallOutput{
     NO_RUNS(0,"NO RUNS",0),
     SINGLE(1,"SINGLE",1),
     DOUBLE(2,"DOUBLES",2),
@@ -23,8 +21,8 @@ enum class ScoreResult{
     }
 
     companion object{
-        fun getScoreResultFromValue(value:Int):ScoreResult{
-            for(x in ScoreResult.values()){
+        fun getScoreResultFromValue(value:Int):BallOutput{
+            for(x in BallOutput.values()){
                 if(x.value == value){
                     return x
                 }

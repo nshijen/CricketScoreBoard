@@ -1,7 +1,5 @@
-package com.shijen.cricketscoreboard.Entities
+package com.shijen.cricketscoreboard.entities
 
-import android.util.Log
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Match() {

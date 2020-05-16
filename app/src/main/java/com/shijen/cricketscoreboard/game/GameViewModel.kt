@@ -1,18 +1,19 @@
-package com.shijen.cricketscoreboard.ScoreBoard
+package com.shijen.cricketscoreboard.game
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.shijen.cricketscoreboard.Entities.Match
-import com.shijen.cricketscoreboard.Entities.Players
-import com.shijen.cricketscoreboard.Entities.ScoreResult
+import com.shijen.cricketscoreboard.entities.Match
+import com.shijen.cricketscoreboard.entities.Players
+import com.shijen.cricketscoreboard.entities.BallOutput
 
-class ScoreboardViewmodel : ViewModel() {
+class GameViewModel : ViewModel() {
 
     var match: Match = Match()
     var oversUpdate: MutableLiveData<StringBuilder> = MutableLiveData()
     var totalUpdate: MutableLiveData<Pair<String, String>> = MutableLiveData()
-    val overUpdateString: StringBuilder = StringBuilder()
     val playersScoreList: MutableLiveData<List<Players>> = MutableLiveData()
+    val ballOutput: MutableLiveData<BallOutput> = MutableLiveData()
+    val overUpdateString: StringBuilder = StringBuilder()
     var gameover = false;
 
     fun bowl() {
@@ -29,19 +30,20 @@ class ScoreboardViewmodel : ViewModel() {
                 }
             }
             val scoreResult = match.bowler.bowl()
+            ballOutput.postValue(scoreResult)
             when (scoreResult) {
-                ScoreResult.SINGLE,
-                ScoreResult.TRIPLE -> {
+                BallOutput.SINGLE,
+                BallOutput.TRIPLE -> {
                     match.updateScores(scoreResult.runs)
                     match.swapRunner()
                 }
-                ScoreResult.DOUBLE,
-                ScoreResult.FOUR,
-                ScoreResult.SIX -> {
+                BallOutput.DOUBLE,
+                BallOutput.FOUR,
+                BallOutput.SIX -> {
                     match.updateScores(scoreResult.runs)
                 }
-                ScoreResult.OUT -> match.newPlayer()
-                ScoreResult.WIDE -> match.updateExtras(scoreResult.runs)
+                BallOutput.OUT -> match.newPlayer()
+                BallOutput.WIDE -> match.updateExtras(scoreResult.runs)
             }
             overUpdateString.appendln(scoreResult.resultString)
             oversUpdate.postValue(overUpdateString)

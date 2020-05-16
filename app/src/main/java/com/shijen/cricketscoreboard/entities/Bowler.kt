@@ -1,15 +1,14 @@
-package com.shijen.cricketscoreboard.Entities
+package com.shijen.cricketscoreboard.entities
 
-import android.util.Log
 import kotlin.random.Random
 
 class Bowler {
     var numberOfBalls:Int = 0
     var score:Int = 0;
-    fun bowl():ScoreResult{
+    fun bowl():BallOutput{
         score = getRandomScore()
-        val bowlResult = ScoreResult.getScoreResultFromValue(score)
-        if(bowlResult!=ScoreResult.WIDE){
+        val bowlResult = BallOutput.getScoreResultFromValue(score)
+        if(bowlResult!=BallOutput.WIDE){
             numberOfBalls++
         }
         return bowlResult

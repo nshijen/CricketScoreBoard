@@ -1,7 +1,7 @@
-package com.shijen.cricketscoreboard.ScoreBoard
+package com.shijen.cricketscoreboard.game.pitch
 
 import androidx.recyclerview.widget.DiffUtil
-import com.shijen.cricketscoreboard.Entities.Players
+import com.shijen.cricketscoreboard.entities.Players
 
 class PlayersDiffUtils : DiffUtil.Callback {
     var oldList: ArrayList<Players>

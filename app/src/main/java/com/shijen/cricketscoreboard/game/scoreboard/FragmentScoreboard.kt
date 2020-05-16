@@ -1,8 +1,7 @@
-package com.shijen.cricketscoreboard.ScoreBoard
+package com.shijen.cricketscoreboard.game.scoreboard
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shijen.cricketscoreboard.R
+import com.shijen.cricketscoreboard.game.GameViewModel
+import com.shijen.cricketscoreboard.game.pitch.PlayersAdapter
 import kotlinx.android.synthetic.main.fragment_scoreboard.*
 import kotlinx.android.synthetic.main.fragment_scoreboard.view.*
 
 
-class FragmentScoreboard : Fragment(), View.OnClickListener {
+class FragmentScoreboard : Fragment() {
     var adapter = PlayersAdapter()
-    lateinit var viewModel: ScoreboardViewmodel
-    lateinit var vibrator: Vibrator
-
+    lateinit var viewModel: GameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,10 +32,12 @@ class FragmentScoreboard : Fragment(), View.OnClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(ScoreboardViewmodel::class.java)
+        parentFragment?.let{
+            viewModel = ViewModelProvider(
+                it,
+                ViewModelProvider.NewInstanceFactory()
+            ).get(GameViewModel::class.java)
+        }
         viewModel.playersScoreList.observe(this, Observer {
             adapter.updatePlayers(it)
         })
@@ -50,22 +51,16 @@ class FragmentScoreboard : Fragment(), View.OnClickListener {
     }
 
     private fun initViews(root: View) {
-        root.btn_bowl.setOnClickListener(this)
         root.rv_score_board.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         root.rv_score_board.adapter = adapter
-        vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
 
-    private fun animateObject() {
-        btn_bowl.animate().rotation(360f).withEndAction {
-            btn_bowl.rotation = 0f
+
+    companion object {
+        @JvmStatic
+        fun getInstance(): Fragment {
+            return FragmentScoreboard()
         }
-    }
-
-    override fun onClick(v: View?) {
-        viewModel.bowl()
-        animateObject()
-        vibrator.vibrate(100);
     }
 }
