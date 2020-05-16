@@ -1,4 +1,4 @@
-package com.shijen.cricketscoreboard.game.pitch
+package com.shijen.cricketscoreboard.game.scoreboard
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -30,18 +30,18 @@ class PlayersAdapter : RecyclerView.Adapter<PlayersAdapter.PlayersViewHolder>() 
         holder.playerScore.setText("" + player.runs)
         when (playerList.get(position).status) {
             BatsmanStatus.RUNNER -> {
-                holder.playerName.setTextColor(Color.BLUE)
+                holder.playerName.setTextColor(Color.BLACK)
                 holder.playerName.setText(player.name);
                 holder.playerStatus.setText("")
             }
             BatsmanStatus.BATSMAN -> {
                 holder.playerName.setText(player.name + "*");
-                holder.playerName.setTextColor(Color.GREEN)
+                holder.playerName.setTextColor(Color.BLACK)
                 holder.playerStatus.setText("")
             }
             BatsmanStatus.NOT_YET_PLAYED -> {
                 holder.playerName.setText(player.name);
-                holder.playerName.setTextColor(Color.YELLOW)
+                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(android.R.color.tertiary_text_light))
                 holder.playerStatus.setText("")
             }
             BatsmanStatus.OUT -> {

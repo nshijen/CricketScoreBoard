@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shijen.cricketscoreboard.R
 import com.shijen.cricketscoreboard.game.GameViewModel
-import com.shijen.cricketscoreboard.game.pitch.PlayersAdapter
-import kotlinx.android.synthetic.main.fragment_scoreboard.*
 import kotlinx.android.synthetic.main.fragment_scoreboard.view.*
 
 
 class FragmentScoreboard : Fragment() {
     var adapter = PlayersAdapter()
+    var overAdapter = OverUpdatesAdapter()
     lateinit var viewModel: GameViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,21 +31,23 @@ class FragmentScoreboard : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity?.let{
+        activity?.let {
             viewModel = ViewModelProvider(
                 it,
                 ViewModelProvider.NewInstanceFactory()
             ).get(GameViewModel::class.java)
         }
+
         viewModel.playersScoreList.observe(this, Observer {
             adapter.updatePlayers(it)
         })
-        viewModel.totalUpdate.observe(this, Observer {
-            tv_total_score.setText(it.first)
-            tv_overs.setText(it.second)
+        viewModel.ballOutput.observe(this, Observer {
+            overAdapter.addBallOutput(it)
         })
-        viewModel.oversUpdate.observe(this, Observer {
-            tv_over_update.setText(it)
+        viewModel.overUp.observe(this, Observer {
+            if(it){
+                overAdapter.clearList()
+            }
         })
     }
 
@@ -54,6 +55,9 @@ class FragmentScoreboard : Fragment() {
         root.rv_score_board.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         root.rv_score_board.adapter = adapter
+        root.rv_over_update.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        root.rv_over_update.adapter = overAdapter
     }
 
 

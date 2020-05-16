@@ -6,7 +6,9 @@ import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +23,8 @@ import kotlinx.android.synthetic.main.fragment_game.view.*
 class FragmentGame : Fragment(), View.OnClickListener {
     lateinit var viewModel: GameViewModel
     lateinit var vibrator: Vibrator
+    var totalScore: TextView? = null
+    var totalOvers: TextView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,12 +44,17 @@ class FragmentGame : Fragment(), View.OnClickListener {
                 viewModel = ViewModelProvider(it,ViewModelProvider.NewInstanceFactory()
                 ).get(GameViewModel::class.java)
             }
-
+        viewModel.totalUpdate.observe(this, Observer {
+            totalScore?.setText(it.first)
+            totalOvers?.setText(it.second)
+        })
     }
 
     private fun initView(view: View) {
         val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
         val tablayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        totalScore = view?.findViewById(R.id.tv_pitch_score)
+        totalOvers = view?.findViewById(R.id.tv_pitch_overs)
         viewPager.adapter = ViewPagerAdapter(this)
         view.btn_bowl.setOnClickListener(this)
         TabLayoutMediator(tablayout,viewPager){ tab,pos ->

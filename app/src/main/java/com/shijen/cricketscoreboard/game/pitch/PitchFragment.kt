@@ -28,8 +28,6 @@ class PitchFragment : Fragment() {
     lateinit var viewModel: GameViewModel
     var player1: View? = null
     var player2: View? = null
-    var totalScore: TextView? = null
-    var totalOvers: TextView? = null
     var lottieAnimation: LottieAnimationView? = null
     lateinit var listener: AnimatorListenerAdapter
     override fun onCreateView(
@@ -44,8 +42,6 @@ class PitchFragment : Fragment() {
     private fun initView(view: View?) {
         player1 = view?.findViewById(R.id.v_player1)
         player2 = view?.findViewById(R.id.v_player2)
-        totalScore = view?.findViewById(R.id.tv_pitch_score)
-        totalOvers = view?.findViewById(R.id.tv_pitch_overs)
         lottieAnimation = view?.findViewById<LottieAnimationView>(R.id.lottieanim)
     }
 
@@ -74,10 +70,6 @@ class PitchFragment : Fragment() {
                     animatePlacardWithConfetti()
                 }
             }
-        })
-        viewModel.totalUpdate.observe(this, Observer {
-            totalScore?.setText(it.first)
-            totalOvers?.setText(it.second)
         })
     }
 

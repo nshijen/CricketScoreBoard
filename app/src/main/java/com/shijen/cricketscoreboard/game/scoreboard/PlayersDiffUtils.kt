@@ -1,4 +1,4 @@
-package com.shijen.cricketscoreboard.game.pitch
+package com.shijen.cricketscoreboard.game.scoreboard
 
 import androidx.recyclerview.widget.DiffUtil
 import com.shijen.cricketscoreboard.entities.Players

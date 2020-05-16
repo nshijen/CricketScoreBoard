@@ -5,26 +5,25 @@ import androidx.lifecycle.ViewModel
 import com.shijen.cricketscoreboard.entities.Match
 import com.shijen.cricketscoreboard.entities.Players
 import com.shijen.cricketscoreboard.entities.BallOutput
+import com.shijen.cricketscoreboard.entities.BatsmanStatus
 
 class GameViewModel : ViewModel() {
 
     var match: Match = Match()
-    var oversUpdate: MutableLiveData<StringBuilder> = MutableLiveData()
     var totalUpdate: MutableLiveData<Pair<String, String>> = MutableLiveData()
     val playersScoreList: MutableLiveData<List<Players>> = MutableLiveData()
     val ballOutput: MutableLiveData<BallOutput> = MutableLiveData()
-    val overUpdateString: StringBuilder = StringBuilder()
+    val overUp: MutableLiveData<Boolean> = MutableLiveData()
+
     var gameover = false;
 
     fun bowl() {
         if (!gameover) {
             if (match.bowler.numberOfBalls == 6) {
                 match.swapRunner()
+                overUp.postValue(true)
                 match.bowler.numberOfBalls = 0
-                overUpdateString.clear();
                 if (match.updateOvers() == 4) {
-                    overUpdateString.appendln("GAME OVER")
-                    oversUpdate.postValue(overUpdateString)
                     gameover = true
                     return
                 }
@@ -45,15 +44,14 @@ class GameViewModel : ViewModel() {
                 BallOutput.OUT -> match.newPlayer()
                 BallOutput.WIDE -> match.updateExtras(scoreResult.runs)
             }
-            overUpdateString.appendln(scoreResult.resultString)
-            oversUpdate.postValue(overUpdateString)
+            val playerList = match.getClonedList()
             totalUpdate.postValue(
                 Pair(
-                    "TOTAL SCORE: " + match.totalScore,
+                    "TOTAL SCORE: " + match.totalScore+"/"+playerList.filter { it.status == BatsmanStatus.OUT }.count(),
                     "OVERS:" + match.totalOvers + "." + match.bowler.numberOfBalls
                 )
             )
-            playersScoreList.postValue(match.getClonedList())
+            playersScoreList.postValue(playerList)
         }
     }
 }

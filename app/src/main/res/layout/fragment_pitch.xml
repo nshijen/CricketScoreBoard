@@ -70,44 +70,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/v_running_pitch"/>
-    <FrameLayout
-        android:id="@+id/fl_bottom_scorelayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/colorPrimaryDark">
-        <TextView
-            android:id="@+id/tv_pitch_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/yellow"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textAllCaps="true"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"
-            tools:text="100/5"/>
-        <TextView
-            android:id="@+id/tv_pitch_overs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:textColor="@color/yellow"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textAllCaps="true"
-            android:paddingEnd="20dp"
-            tools:text="4.5"
-            android:paddingRight="20dp" />
-    </FrameLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lottie_animation_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fl_bottom_scorelayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
 
         <TextView
