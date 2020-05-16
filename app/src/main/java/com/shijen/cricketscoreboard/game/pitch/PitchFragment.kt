@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.shijen.cricketscoreboard.R
 import com.shijen.cricketscoreboard.entities.BallOutput
 import com.shijen.cricketscoreboard.game.GameViewModel
@@ -28,6 +30,7 @@ class PitchFragment : Fragment() {
     var player2: View? = null
     var totalScore: TextView? = null
     var totalOvers: TextView? = null
+    var lottieAnimation: LottieAnimationView? = null
     lateinit var listener: AnimatorListenerAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +46,7 @@ class PitchFragment : Fragment() {
         player2 = view?.findViewById(R.id.v_player2)
         totalScore = view?.findViewById(R.id.tv_pitch_score)
         totalOvers = view?.findViewById(R.id.tv_pitch_overs)
+        lottieAnimation = view?.findViewById<LottieAnimationView>(R.id.lottieanim)
     }
 
     override fun onAttach(context: Context) {
@@ -57,6 +61,18 @@ class PitchFragment : Fragment() {
                 BallOutput.SINGLE, BallOutput.DOUBLE, BallOutput.TRIPLE -> animatePlayers(
                     ballOutput.runs
                 )
+                BallOutput.FOUR,BallOutput.SIX->{
+                    lottieAnimation?.visibility = View.VISIBLE
+                    tvStatus.visibility = View.VISIBLE
+                    tvStatus.setText(ballOutput.resultString)
+                    animatePlacardWithConfetti()
+                }
+                BallOutput.NO_RUNS,BallOutput.OUT,BallOutput.WIDE ->{
+                    tvStatus.setText(ballOutput.resultString)
+                    tvStatus.visibility =View.VISIBLE
+                    lottieAnimation?.visibility =View.GONE
+                    animatePlacardWithConfetti()
+                }
             }
         })
         viewModel.totalUpdate.observe(this, Observer {
@@ -86,8 +102,35 @@ class PitchFragment : Fragment() {
             }
             runAnimation(p1_y, p2_y, listener)
         }
+    }
+    fun animatePlacardWithConfetti(){
+        val animatorSet = AnimatorSet()
+        val objectInAnimator = ObjectAnimator.ofFloat(lottie_animation_layout,"alpha",0f,1f)
+        val objectOutAnimator = ObjectAnimator.ofFloat(lottie_animation_layout,"alpha",1f,0f)
+        animatorSet.duration = 1000
+        animatorSet.playSequentially(objectInAnimator,objectOutAnimator)
+        animatorSet.addListener(object :AnimatorListenerAdapter(){
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                lottieAnimation?.cancelAnimation()
+            }
+        })
+        lottieAnimation?.playAnimation()
+        animatorSet.start()
+    }
 
-
+    fun animatePlacard(){
+        val animatorSet = AnimatorSet()
+        val objectInAnimator = ObjectAnimator.ofFloat(tvStatus,"alpha",0f,1f)
+        val objectOutAnimator = ObjectAnimator.ofFloat(tvStatus,"alpha",1f,0f)
+        animatorSet.duration = 1000
+        animatorSet.playSequentially(objectInAnimator,objectOutAnimator)
+        animatorSet.addListener(object :AnimatorListenerAdapter(){
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+            }
+        })
+        animatorSet.start()
     }
 
     fun runAnimation(
@@ -113,5 +156,4 @@ class PitchFragment : Fragment() {
             return PitchFragment()
         }
     }
-
 }
