@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cardview_dark_background"
+    android:background="@android:color/holo_green_light"
     tools:context=".game.pitch.PitchFragment">
+    <View
+        android:id="@+id/v_runner_patch"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/pitchColor"
+        app:layout_constraintBottom_toTopOf="@id/v_running_pitch"/>
+    <View
+        android:id="@+id/v_runner_crease"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/v_running_pitch"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/v_running_pitch"
         android:layout_width="200dp"
         android:layout_height="400dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="125dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/pitchColor"
         android:layout_gravity="center">
+
         <View
             android:id="@+id/v_player1"
             android:layout_width="20dp"
@@ -30,5 +54,52 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@android:color/holo_blue_bright" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/v_batsman_patch"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/pitchColor"
+        app:layout_constraintTop_toBottomOf="@id/v_running_pitch"/>
+    <View
+        android:id="@+id/v_batsman_crease"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/v_running_pitch"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/tv_pitch_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textAllCaps="true"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            tools:text="100/5"/>
+        <TextView
+            android:id="@+id/tv_pitch_overs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textAllCaps="true"
+            android:paddingEnd="20dp"
+            tools:text="4.5"
+            android:paddingRight="20dp" />
+    </FrameLayout>
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

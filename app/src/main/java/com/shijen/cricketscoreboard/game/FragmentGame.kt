@@ -36,10 +36,11 @@ class FragmentGame : Fragment(), View.OnClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         vibrator = activity?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator;
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(GameViewModel::class.java)
+            activity?.let {
+                viewModel = ViewModelProvider(it,ViewModelProvider.NewInstanceFactory()
+                ).get(GameViewModel::class.java)
+            }
+
     }
 
     private fun initView(view: View) {

@@ -32,7 +32,7 @@ class FragmentScoreboard : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        parentFragment?.let{
+        activity?.let{
             viewModel = ViewModelProvider(
                 it,
                 ViewModelProvider.NewInstanceFactory()
