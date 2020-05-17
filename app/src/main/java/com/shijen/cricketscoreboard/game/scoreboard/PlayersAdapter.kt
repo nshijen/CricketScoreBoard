@@ -28,25 +28,23 @@ class PlayersAdapter : RecyclerView.Adapter<PlayersAdapter.PlayersViewHolder>() 
     override fun onBindViewHolder(holder: PlayersViewHolder, position: Int) {
         val player = playerList.get(position)
         holder.playerScore.setText("" + player.runs)
+        holder.playerName.setText(player.name)
         when (playerList.get(position).status) {
             BatsmanStatus.RUNNER -> {
-                holder.playerName.setTextColor(Color.BLACK)
-                holder.playerName.setText(player.name);
+                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(android.R.color.primary_text_dark))
                 holder.playerStatus.setText("")
             }
             BatsmanStatus.BATSMAN -> {
-                holder.playerName.setText(player.name + "*");
-                holder.playerName.setTextColor(Color.BLACK)
+                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(android.R.color.primary_text_dark))
                 holder.playerStatus.setText("")
+                holder.playerScore.setText("" + player.runs+" *")
             }
             BatsmanStatus.NOT_YET_PLAYED -> {
-                holder.playerName.setText(player.name);
-                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(android.R.color.tertiary_text_light))
+                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(android.R.color.tertiary_text_dark))
                 holder.playerStatus.setText("")
             }
             BatsmanStatus.OUT -> {
-                holder.playerName.setText(player.name);
-                holder.playerName.setTextColor(Color.RED)
+                holder.playerName.setTextColor(holder.itemView.context.resources.getColor(R.color.material_red))
                 holder.playerStatus.setText("OUT")
 
             }

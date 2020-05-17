@@ -23,9 +23,9 @@ class OverUpdatesAdapter: RecyclerView.Adapter<OverUpdatesAdapter.OverUpdateHold
     override fun onBindViewHolder(holder: OverUpdateHolder, position: Int) {
         val ballOutput = list.get(position)
         if(ballOutput.equals(BallOutput.OUT)){
-            holder.item.setTextColor(holder.item.context.resources.getColor(android.R.color.holo_red_dark))
+            holder.item.setTextColor(holder.item.context.resources.getColor(R.color.material_red))
         }else{
-            holder.item.setTextColor(holder.item.context.resources.getColor(android.R.color.holo_blue_dark))
+            holder.item.setTextColor(holder.item.context.resources.getColor(R.color.material_blue))
         }
         holder.item.setText(ballOutput.minstring)
     }

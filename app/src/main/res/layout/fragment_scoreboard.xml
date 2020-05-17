@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".game.scoreboard.FragmentScoreboard">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,10 +23,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+
                 android:padding="10dp"
                 android:text="OVER UPDATES"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@android:color/secondary_text_dark"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -38,9 +38,9 @@
                 android:paddingBottom="5dp" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -61,12 +61,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:text="PLAYERS UPDATE"
-                android:textColor="@android:color/tertiary_text_light"
+                android:textColor="@android:color/secondary_text_dark"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -76,5 +75,5 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

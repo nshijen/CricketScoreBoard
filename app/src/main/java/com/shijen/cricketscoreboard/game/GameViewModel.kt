@@ -47,7 +47,7 @@ class GameViewModel : ViewModel() {
             val playerList = match.getClonedList()
             totalUpdate.postValue(
                 Pair(
-                    "TOTAL SCORE: " + match.totalScore+"/"+playerList.filter { it.status == BatsmanStatus.OUT }.count(),
+                    "SCORE: " + match.totalScore+"/"+playerList.filter { it.status == BatsmanStatus.OUT }.count(),
                     "OVERS:" + match.totalOvers + "." + match.bowler.numberOfBalls
                 )
             )

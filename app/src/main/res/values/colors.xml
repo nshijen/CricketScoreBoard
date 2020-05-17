@@ -3,7 +3,12 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="pitchColor">#C39302</color>
+    <color name="pitchColor">#795548</color>
     <color name="yellow">#DACF03</color>
     <color name="light_white">#F3F3F3</color>
+    <color name="material_red">#e57373</color>
+    <color name="material_blue">#64b5f6</color>
+    <color name="material_blue_dark">#263238</color>
+    <color name="material_green_light">#81c784</color>
+    <color name="material_yellow_light">#FFF59D</color>
 </resources>
